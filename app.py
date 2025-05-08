@@ -86,8 +86,6 @@ def home():
 
 @app.route('/recommend_diet', methods=['POST', 'GET'])
 def get_recommendation():
-    if request.method == 'GET':
-        return "Please send a POST request with required parameters."
     data = request.json
     try:
         meals, reward, goal, final_cals, spent = recommend_diet(
