@@ -7,7 +7,7 @@ import random
 app = Flask(__name__)
 
 # Load your data
-DATA_PATH = "flask/meal3_mealTime.csv"
+DATA_PATH = "meal3_mealTime.csv"
 df = pd.read_csv(DATA_PATH)
 
 def filter_meals_by_diet(diet_types, meal_time):
