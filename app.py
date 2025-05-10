@@ -7,7 +7,7 @@ import random
 app = Flask(__name__)
 
 # Load your data
-DATA_PATH = "meal3_mealTime.csv"
+DATA_PATH = "flask/meal3_mealTime.csv"
 df = pd.read_csv(DATA_PATH)
 
 def filter_meals_by_diet(diet_types, meal_time):
@@ -93,15 +93,19 @@ class DietAgent:
     def learn(self, state, action, reward, next_state):
         state = str(state)
         next_state = str(next_state)
+
         if state not in self.q_table:
             self.q_table[state] = np.zeros(self.n_actions)
         if next_state not in self.q_table:
             self.q_table[next_state] = np.zeros(self.n_actions)
+
         predict = self.q_table[state][action]
         target = reward + self.gamma * np.max(self.q_table[next_state])
         self.q_table[state][action] += self.alpha * (target - predict)
+
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
+
 
 def train_agent(diet_type, total_calories, total_budget, meal_times, episodes=5000):
     meals_by_time = {mt: filter_meals_by_diet(diet_type, mt) for mt in meal_times}
