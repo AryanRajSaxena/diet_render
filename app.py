@@ -107,7 +107,7 @@ class DietAgent:
             self.epsilon *= self.epsilon_decay
 
 
-def train_agent(diet_type, total_calories, total_budget, meal_times, episodes=5000):
+def train_agent(diet_type, total_calories, total_budget, meal_times, episodes=500):
     meals_by_time = {mt: filter_meals_by_diet(diet_type, mt) for mt in meal_times}
     if any(m.empty for m in meals_by_time.values()):
         raise ValueError("No meals found for one or more selected meal times")
