@@ -211,6 +211,7 @@ def get_recommendation():
     if request.method == 'GET':
         return "Please send a POST request with required parameters."
     data = request.json
+    print("📥 Received JSON:", data)  # 🧾 Log incoming data
 
     diet_type = data['diet_type']
     total_calories = data['total_calories']
@@ -232,7 +233,9 @@ def get_recommendation():
 
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
